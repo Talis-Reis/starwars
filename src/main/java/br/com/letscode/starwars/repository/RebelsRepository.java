@@ -1,8 +1,14 @@
 package br.com.letscode.starwars.repository;
 
-import br.com.letscode.starwars.model.Rebels;
-import org.springframework.data.repository.CrudRepository;
+import br.com.letscode.starwars.model.Entity.RebelEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface RebelsRepository extends CrudRepository <Rebels, Long>{
 
+@Repository
+public interface RebelsRepository extends JpaRepository<RebelEntity, Long> {
+
+//    boolean existsByAge(Integer age);
+//    @Query("SELECT c FROM InventoryEntity c JOIN c.RebelEntity p")
+//    public List<RebelEntity> getJoinInformation();
 }
