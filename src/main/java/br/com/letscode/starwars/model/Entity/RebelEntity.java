@@ -8,13 +8,14 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Table(name="TB_REBELS")
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RebelEntity {
+public class RebelEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,7 +45,7 @@ public class RebelEntity {
     @Column(name = "REPORTS_COUNTER")
     private Integer reportsCounter;
 
-    @OneToOne(mappedBy = "rebel_id")
+    @OneToOne(mappedBy = "rebel")
     private InventoryEntity inventory;
 
 
