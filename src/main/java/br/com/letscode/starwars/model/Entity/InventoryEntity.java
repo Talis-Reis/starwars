@@ -44,7 +44,10 @@ public class InventoryEntity implements Serializable {
 
     public static InventoryEntity of(CreateInventoryRebelRequest request){
         InventoryEntity inventory = new InventoryEntity();
+        RebelEntity rebel = new RebelEntity();
+        rebel.setRebel(request.getRebel());
         BeanUtils.copyProperties(request, inventory);
+        inventory.setRebel(rebel);
         return inventory;
     }
 }
