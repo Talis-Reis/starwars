@@ -1,6 +1,5 @@
 package br.com.letscode.starwars.model.DTO;
 
-import br.com.letscode.starwars.model.Entity.RebelEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

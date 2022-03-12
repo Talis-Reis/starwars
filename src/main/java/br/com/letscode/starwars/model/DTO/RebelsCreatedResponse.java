@@ -1,6 +1,6 @@
 package br.com.letscode.starwars.model.DTO;
 
-import br.com.letscode.starwars.model.Entity.RebelEntity;
+import br.com.letscode.starwars.model.Entity.Rebel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +21,7 @@ public class RebelsCreatedResponse {
     private Integer traitor;
     private Integer reportsCounter;
 
-    public static RebelsCreatedResponse of(RebelEntity rebels){
+    public static RebelsCreatedResponse of(Rebel rebels){
         RebelsCreatedResponse response = new RebelsCreatedResponse();
         BeanUtils.copyProperties(rebels, response);
         return response;

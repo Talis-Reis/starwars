@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RebelEntity implements Serializable {
+public class Rebel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,18 +45,14 @@ public class RebelEntity implements Serializable {
     @Column(name = "REPORTS_COUNTER")
     private Integer reportsCounter;
 
-    @OneToOne(mappedBy = "rebel")
-    private InventoryEntity inventory;
-
-
-    public static RebelEntity of(CreateRebelsRequest request){
-        RebelEntity rebel = new RebelEntity();
+    public static Rebel of(CreateRebelsRequest request){
+        Rebel rebel = new Rebel();
         BeanUtils.copyProperties(request, rebel);
         return rebel;
     }
 
-    public static RebelEntity of(ChangeRebelsRequest request){
-        RebelEntity rebel = new RebelEntity();
+    public static Rebel of(ChangeRebelsRequest request){
+        Rebel rebel = new Rebel();
         BeanUtils.copyProperties(request, rebel);
         return rebel;
     }

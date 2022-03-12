@@ -1,9 +1,6 @@
 package br.com.letscode.starwars.model.Entity;
 
 import br.com.letscode.starwars.model.DTO.CreateInventoryRebelRequest;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,16 +8,13 @@ import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 @Table(name="TB_INVENTORY")
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class InventoryEntity implements Serializable {
+public class Inventory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,11 +34,11 @@ public class InventoryEntity implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "rebel_id", referencedColumnName = "rebel")
-    private RebelEntity rebel;
+    private Rebel rebel;
 
-    public static InventoryEntity of(CreateInventoryRebelRequest request){
-        InventoryEntity inventory = new InventoryEntity();
-        RebelEntity rebel = new RebelEntity();
+    public static Inventory of(CreateInventoryRebelRequest request){
+        Inventory inventory = new Inventory();
+        Rebel rebel = new Rebel();
         rebel.setRebel(request.getRebel());
         BeanUtils.copyProperties(request, inventory);
         inventory.setRebel(rebel);

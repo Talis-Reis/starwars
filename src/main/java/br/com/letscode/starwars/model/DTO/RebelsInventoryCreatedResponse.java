@@ -1,7 +1,7 @@
 package br.com.letscode.starwars.model.DTO;
 
-import br.com.letscode.starwars.model.Entity.InventoryEntity;
-import br.com.letscode.starwars.model.Entity.RebelEntity;
+import br.com.letscode.starwars.model.Entity.Inventory;
+import br.com.letscode.starwars.model.Entity.Rebel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,9 +20,9 @@ public class RebelsInventoryCreatedResponse {
     private Integer food;
 
 
-    public static RebelsInventoryCreatedResponse of(InventoryEntity rebelsInventory){
+    public static RebelsInventoryCreatedResponse of(Inventory rebelsInventory){
         RebelsInventoryCreatedResponse response = new RebelsInventoryCreatedResponse();
-        RebelEntity rebel = rebelsInventory.getRebel();
+        Rebel rebel = rebelsInventory.getRebel();
         BeanUtils.copyProperties(rebelsInventory, response);
         response.setRebel(rebel.getRebel());
         return response;
