@@ -1,0 +1,31 @@
+
+.info{
+    padding: 50px calc(50vw - 50%);
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/694px-Star_Wars_Logo.svg.png") !important;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: black;
+    margin: 0 calc(50% - 50vw) !important;}
+
+.title, .renderedMarkdown p{
+    color: white !important;
+}
+
+.swagger-ui .info a{
+    color: yellow;
+}
+
+[data-tag]::before{
+    margin-right: 0.4rem;
+}
+
+[data-tag="Rebels"]::before {
+    content: "\1F525";
+    vertical-align: middle;
+}
+
+[data-tag="Negotiations"]::before {
+    content: "\1F91D";
+    vertical-align: middle;
+}

@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class CreateRebelsRequest {
-
     private String name;
     private Integer age;
     private String genre;
@@ -19,5 +18,5 @@ public class CreateRebelsRequest {
     private String baseName;
     private Integer traitor;
     private Integer reportsCounter;
-
+    private InventoryEmbedded inventory;
 }

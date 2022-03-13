@@ -12,7 +12,6 @@ import org.springframework.beans.BeanUtils;
 @NoArgsConstructor
 @Builder
 public class RebelsCreatedResponse {
-
     private Long rebel;
     private String name;
     private Integer age;
@@ -22,10 +21,16 @@ public class RebelsCreatedResponse {
     private String baseName;
     private Integer traitor;
     private Integer reportsCounter;
+    private InventoryEmbedded inventory;
 
     public static RebelsCreatedResponse of(Rebel rebels){
         RebelsCreatedResponse response = new RebelsCreatedResponse();
+
+        var inventory = new InventoryEmbedded();
+        BeanUtils.copyProperties(rebels.getInventory(), inventory);
+
         BeanUtils.copyProperties(rebels, response);
+        response.setInventory(inventory);
         return response;
     }
 
