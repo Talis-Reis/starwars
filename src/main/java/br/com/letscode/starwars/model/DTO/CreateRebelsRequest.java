@@ -4,13 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateRebelsRequest {
-
     private String name;
     private Integer age;
     private String genre;
@@ -19,5 +16,5 @@ public class CreateRebelsRequest {
     private String baseName;
     private Integer traitor;
     private Integer reportsCounter;
-
+    private InventoryEmbedded inventory;
 }

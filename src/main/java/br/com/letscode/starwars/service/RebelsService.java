@@ -1,5 +1,7 @@
 package br.com.letscode.starwars.service;
 
+import br.com.letscode.starwars.enums.errors.RebelValidationError;
+import br.com.letscode.starwars.exception.BusinessException;
 import br.com.letscode.starwars.model.DTO.*;
 import br.com.letscode.starwars.model.Entity.Inventory;
 import br.com.letscode.starwars.model.Entity.Punctuation;
@@ -29,49 +31,37 @@ public class RebelsService {
 
     public RebelsCreatedResponse create(CreateRebelsRequest request){
         log.debug("Received rebel to create: {}",request);
+        Inventory newInventory = Inventory.of(request.getInventory());
+        Inventory savedInventory = repositoryInventory.save(newInventory);
+
         Rebel newRebel = Rebel.of(request);
+        newRebel.setInventory(savedInventory);
         Rebel savedRebel = repository.save(newRebel);
-        log.debug("Received rebel in service: {}",savedRebel);
+
+        savedInventory.setRebel(savedRebel);
+        repositoryInventory.save(savedInventory);
+
+//        log.debug("Received rebel in service: {}",savedRebel); TODO
         return RebelsCreatedResponse.of(savedRebel);
     }
 
-    public RebelsInventoryCreatedResponse createInventory( CreateInventoryRebelRequest request) {
-        log.debug("Received inventory rebel to create: {}",request);
-        Inventory newInventoryRebel = Inventory.of(request);
-        RebelScore rebelScore = new RebelScore();
-        Punctuation punctuation = new Punctuation();
-        Integer TotalPoints = 0;
-
-        punctuation.setWeapons(repositoryPunctuation.getWeapons());
-        punctuation.setAmmunition(repositoryPunctuation.getAmmunition());
-        punctuation.setWaters(repositoryPunctuation.getWaters());
-        punctuation.setFood(repositoryPunctuation.getFood());
-
-        TotalPoints = newInventoryRebel.getWeapons() * punctuation.getWeapons();
-        TotalPoints = TotalPoints + (newInventoryRebel.getAmmunition() * punctuation.getAmmunition());
-        TotalPoints = TotalPoints + (newInventoryRebel.getWaters() * punctuation.getWaters());
-        TotalPoints = TotalPoints + (newInventoryRebel.getFood() * punctuation.getFood());
-        rebelScore.setTotalPoints(TotalPoints);
-        rebelScoreRepository.save(rebelScore);
-
-        Inventory savedInventoryRebel = repositoryInventory.save(newInventoryRebel);
-        log.debug("Received inventory rebel in service: {}",savedInventoryRebel);
-        return RebelsInventoryCreatedResponse.of(savedInventoryRebel);
-    }
-
     public List<Rebel> getAllRebels(){
-        List<Rebel> result = new ArrayList<>();
-        repository.findAll().forEach(result::add);
-        return result;
+        return new ArrayList<>(repository.findAll());
     }
 
     public Rebel findById(Long id) {
-        return repository.findById(id).get();
+        var optionalRebel = repository.findById(id);
+
+        if (optionalRebel.isEmpty()){
+            throw new BusinessException(RebelValidationError.NOT_FOUND_REBEL, "Não existe rebelde com o id: " + id);
+        }
+
+        return optionalRebel.get();
     }
 
     public ChangeRebelResponse changeRebel(Long id, ChangeRebelsRequest request) {
         Rebel receiveRebel = Rebel.of(request);
-        Rebel changeRebel = repository.findById(id).get();
+        Rebel changeRebel = this.findById(id);
         BeanUtils.copyProperties(receiveRebel, changeRebel, "rebel");
         changeRebel = repository.save(changeRebel);
         return ChangeRebelResponse.of(changeRebel);
@@ -83,7 +73,7 @@ public class RebelsService {
 
     public ChangeRebelResponse changeParcialRebel(Long id, ChangeRebelsRequest request) {
         Rebel receiveRebel = Rebel.of(request);
-        Rebel changeRebel = repository.findById(id).get();
+        Rebel changeRebel = this.findById(id);
         String[] ignoreProperties = new String[9];
         ignoreProperties[0] = "id";
         ignoreProperties[1] = "traitor";
