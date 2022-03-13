@@ -1,7 +1,6 @@
 package br.com.letscode.starwars.controller;
 
 import br.com.letscode.starwars.model.DTO.*;
-import br.com.letscode.starwars.model.Entity.Inventory;
 import br.com.letscode.starwars.model.Entity.Rebel;
 import br.com.letscode.starwars.service.PunctuationService;
 import br.com.letscode.starwars.service.RebelsService;

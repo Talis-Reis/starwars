@@ -3,13 +3,7 @@ package br.com.letscode.starwars.service;
 import br.com.letscode.starwars.enums.errors.RebelValidationError;
 import br.com.letscode.starwars.exception.BusinessException;
 import br.com.letscode.starwars.model.DTO.*;
-import br.com.letscode.starwars.model.Entity.Inventory;
-import br.com.letscode.starwars.model.Entity.Punctuation;
 import br.com.letscode.starwars.model.Entity.Rebel;
-import br.com.letscode.starwars.model.Entity.RebelScore;
-import br.com.letscode.starwars.repository.PunctuationRepository;
-import br.com.letscode.starwars.repository.RebelScoreRepository;
-import br.com.letscode.starwars.repository.RebelsInventoryRepository;
 import br.com.letscode.starwars.repository.RebelsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,9 +19,6 @@ import java.util.List;
 public class RebelsService {
 
     private final RebelsRepository repository;
-    private final RebelsInventoryRepository repositoryInventory;
-    private final PunctuationRepository repositoryPunctuation;
-    private final RebelScoreRepository rebelScoreRepository;
 
     public RebelsCreatedResponse create(CreateRebelsRequest request){
         log.debug("Received rebel to create: {}",request);
@@ -41,7 +32,6 @@ public class RebelsService {
         savedInventory.setRebel(savedRebel);
         repositoryInventory.save(savedInventory);
 
-//        log.debug("Received rebel in service: {}",savedRebel); TODO
         return RebelsCreatedResponse.of(savedRebel);
     }
 
@@ -65,10 +55,6 @@ public class RebelsService {
         BeanUtils.copyProperties(receiveRebel, changeRebel, "rebel");
         changeRebel = repository.save(changeRebel);
         return ChangeRebelResponse.of(changeRebel);
-    }
-
-    public Inventory findByIdInventory(Long id) {
-        return repositoryInventory.getJoinInformation(id);
     }
 
     public ChangeRebelResponse changeParcialRebel(Long id, ChangeRebelsRequest request) {

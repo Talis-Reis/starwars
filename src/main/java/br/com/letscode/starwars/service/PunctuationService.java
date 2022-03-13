@@ -2,8 +2,6 @@ package br.com.letscode.starwars.service;
 
 import br.com.letscode.starwars.model.Entity.Punctuation;
 import br.com.letscode.starwars.repository.PunctuationRepository;
-import br.com.letscode.starwars.repository.RebelsInventoryRepository;
-import br.com.letscode.starwars.repository.RebelsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,8 +13,6 @@ import org.springframework.stereotype.Service;
 public class PunctuationService {
 
     private final PunctuationRepository repositoryPunctuation;
-    private final RebelsRepository repository;
-    private final RebelsInventoryRepository repositoryInventory;
 
     public void createPunctuation() {
         Punctuation punctuation = new Punctuation();
