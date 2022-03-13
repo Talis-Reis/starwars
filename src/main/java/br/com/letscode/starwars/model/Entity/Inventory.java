@@ -1,13 +1,10 @@
 package br.com.letscode.starwars.model.Entity;
 
-import br.com.letscode.starwars.model.DTO.CreateInventoryRebelRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Table(name="TB_INVENTORY")
 @Entity
@@ -36,12 +33,4 @@ public class Inventory {
     @JoinColumn(name = "rebel_id", referencedColumnName = "rebel")
     private Rebel rebel;
 
-    public static Inventory of(CreateInventoryRebelRequest request){
-        Inventory inventory = new Inventory();
-        Rebel rebel = new Rebel();
-        rebel.setRebel(request.getRebel());
-        BeanUtils.copyProperties(request, inventory);
-        inventory.setRebel(rebel);
-        return inventory;
-    }
 }

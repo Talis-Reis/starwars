@@ -1,13 +1,7 @@
 package br.com.letscode.starwars.service;
 
 import br.com.letscode.starwars.model.DTO.*;
-import br.com.letscode.starwars.model.Entity.Inventory;
-import br.com.letscode.starwars.model.Entity.Punctuation;
 import br.com.letscode.starwars.model.Entity.Rebel;
-import br.com.letscode.starwars.model.Entity.RebelScore;
-import br.com.letscode.starwars.repository.PunctuationRepository;
-import br.com.letscode.starwars.repository.RebelScoreRepository;
-import br.com.letscode.starwars.repository.RebelsInventoryRepository;
 import br.com.letscode.starwars.repository.RebelsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,9 +17,6 @@ import java.util.List;
 public class RebelsService {
 
     private final RebelsRepository repository;
-    private final RebelsInventoryRepository repositoryInventory;
-    private final PunctuationRepository repositoryPunctuation;
-    private final RebelScoreRepository rebelScoreRepository;
 
     public RebelsCreatedResponse create(CreateRebelsRequest request){
         log.debug("Received rebel to create: {}",request);
@@ -33,30 +24,6 @@ public class RebelsService {
         Rebel savedRebel = repository.save(newRebel);
         log.debug("Received rebel in service: {}",savedRebel);
         return RebelsCreatedResponse.of(savedRebel);
-    }
-
-    public RebelsInventoryCreatedResponse createInventory( CreateInventoryRebelRequest request) {
-        log.debug("Received inventory rebel to create: {}",request);
-        Inventory newInventoryRebel = Inventory.of(request);
-        RebelScore rebelScore = new RebelScore();
-        Punctuation punctuation = new Punctuation();
-        Integer TotalPoints = 0;
-
-        punctuation.setWeapons(repositoryPunctuation.getWeapons());
-        punctuation.setAmmunition(repositoryPunctuation.getAmmunition());
-        punctuation.setWaters(repositoryPunctuation.getWaters());
-        punctuation.setFood(repositoryPunctuation.getFood());
-
-        TotalPoints = newInventoryRebel.getWeapons() * punctuation.getWeapons();
-        TotalPoints = TotalPoints + (newInventoryRebel.getAmmunition() * punctuation.getAmmunition());
-        TotalPoints = TotalPoints + (newInventoryRebel.getWaters() * punctuation.getWaters());
-        TotalPoints = TotalPoints + (newInventoryRebel.getFood() * punctuation.getFood());
-        rebelScore.setTotalPoints(TotalPoints);
-        rebelScoreRepository.save(rebelScore);
-
-        Inventory savedInventoryRebel = repositoryInventory.save(newInventoryRebel);
-        log.debug("Received inventory rebel in service: {}",savedInventoryRebel);
-        return RebelsInventoryCreatedResponse.of(savedInventoryRebel);
     }
 
     public List<Rebel> getAllRebels(){
@@ -75,10 +42,6 @@ public class RebelsService {
         BeanUtils.copyProperties(receiveRebel, changeRebel, "rebel");
         changeRebel = repository.save(changeRebel);
         return ChangeRebelResponse.of(changeRebel);
-    }
-
-    public Inventory findByIdInventory(Long id) {
-        return repositoryInventory.getJoinInformation(id);
     }
 
     public ChangeRebelResponse changeParcialRebel(Long id, ChangeRebelsRequest request) {

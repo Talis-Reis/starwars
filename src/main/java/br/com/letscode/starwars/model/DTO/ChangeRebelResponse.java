@@ -1,6 +1,7 @@
 package br.com.letscode.starwars.model.DTO;
 import br.com.letscode.starwars.model.Entity.Rebel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -8,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ChangeRebelResponse {
 
     private Long rebel;

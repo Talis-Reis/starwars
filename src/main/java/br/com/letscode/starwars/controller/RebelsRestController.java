@@ -1,7 +1,6 @@
 package br.com.letscode.starwars.controller;
 
 import br.com.letscode.starwars.model.DTO.*;
-import br.com.letscode.starwars.model.Entity.Inventory;
 import br.com.letscode.starwars.model.Entity.Rebel;
 import br.com.letscode.starwars.service.PunctuationService;
 import br.com.letscode.starwars.service.RebelsService;
@@ -31,15 +30,6 @@ public class RebelsRestController {
         return rebel;
     }
 
-    @PostMapping(value = "/inventory")
-    @ResponseStatus(HttpStatus.CREATED)
-    public RebelsInventoryCreatedResponse createInventory(@RequestBody CreateInventoryRebelRequest request){
-        log.info("Creating inventory rebel: {}", request);
-        RebelsInventoryCreatedResponse rebelInventory =  rebelsService.createInventory(request);
-        log.info("Inventory Rebel Created: {}", rebelInventory);
-        return rebelInventory;
-    }
-
     @GetMapping
     public List<Rebel> getAll(){
         List<Rebel> retornoRebel = rebelsService.getAllRebels();
@@ -49,11 +39,6 @@ public class RebelsRestController {
     @GetMapping(value = "/{id}")
     public Rebel findById(@PathVariable("id") Long id){
         return rebelsService.findById(id);
-    }
-
-    @GetMapping(value = "/inventaryAndRebel/{id}")
-    public Inventory findByIdInventory(@PathVariable("id") Long id){
-        return rebelsService.findByIdInventory(id);
     }
 
     @PutMapping(value = "/{id}")

@@ -3,18 +3,19 @@ package br.com.letscode.starwars.model.Entity;
 import br.com.letscode.starwars.model.DTO.ChangeRebelsRequest;
 import br.com.letscode.starwars.model.DTO.CreateRebelsRequest;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Table(name="TB_REBELS")
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Rebel {
 
     @Id
@@ -44,6 +45,7 @@ public class Rebel {
 
     @Column(name = "REPORTS_COUNTER")
     private Integer reportsCounter;
+
 
     public static Rebel of(CreateRebelsRequest request){
         Rebel rebel = new Rebel();
