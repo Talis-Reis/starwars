@@ -34,9 +34,9 @@ public class NegotiationService {
         }
         var sellerRebel = sellerRebelOptional.get();
 
-        if (sellerRebel.getTraitor() == 1){
-            throw new BusinessException(DEALER_WITH_LOCKED_INVENTORY, "Rebelde traidor não é digno de negociar (inventário bloqueado).");
-        }
+//        if (sellerRebel.getTraitor() == 1){
+//            throw new BusinessException(DEALER_WITH_LOCKED_INVENTORY, "Rebelde traidor não é digno de negociar (inventário bloqueado).");
+//        }
 
         if (rebelId.equals(request.getBuyerRebel())){
             throw new BusinessException(FORBIDDEN_NEGOTIATE_WITH_YOURSELF, "Um rebelde não pode negociar consigo mesmo.");
@@ -46,9 +46,9 @@ public class NegotiationService {
             throw new BusinessException(REBEL_BUYER_NOT_FOUND, "Rebelde cliente não existe.");
         }
         var buyerRebel = buyerRebelOptional.get();
-        if (buyerRebel.getTraitor() == 1){
-            throw new BusinessException(CLIENT_WITH_LOCKED_INVENTORY, "Rebelde cliente é um traidor! Melhor não negociar..");
-        }
+//        if (buyerRebel.getTraitor() == 1){
+//            throw new BusinessException(CLIENT_WITH_LOCKED_INVENTORY, "Rebelde cliente é um traidor! Melhor não negociar..");
+//        }
 
         Negotiation newNegotiation = Negotiation.of(sellerRebel, buyerRebel, request);
 

@@ -1,12 +1,12 @@
 package br.com.letscode.starwars.model.Entity;
 
-import br.com.letscode.starwars.model.DTO.CreateInventoryRebelRequest;
 import br.com.letscode.starwars.model.DTO.InventoryEmbedded;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
 

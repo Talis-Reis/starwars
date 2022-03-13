@@ -2,14 +2,15 @@ package br.com.letscode.starwars.controller;
 
 import br.com.letscode.starwars.model.DTO.*;
 import br.com.letscode.starwars.model.Entity.Rebel;
-import br.com.letscode.starwars.service.PunctuationService;
 import br.com.letscode.starwars.service.RebelsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.beans.BeanUtils;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
@@ -20,8 +21,9 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 class RebelsRestControllerTest {
 
-    @Mock
-    PunctuationService punctuationService;
+    @InjectMocks
+    RebelsRestController restController;
+
     @Mock
     RebelsService rebelsService;
     @Mock
@@ -53,10 +55,8 @@ class RebelsRestControllerTest {
                         .age(28)
                         .genre("masculino")
                         .baseName("Vênus")
-                        .latitud("2")
-                        .longitud("3")
-                        .traitor(1)
-                        .reportsCounter(3)
+                        .latitude(2F)
+                        .longitude(2F)
                         .build();
 
         rebelsCreatedResponse =
@@ -67,10 +67,8 @@ class RebelsRestControllerTest {
                         .age(28)
                         .genre("masculino")
                         .baseName("Vênus")
-                        .latitud("2")
-                        .longitud("3")
-                        .traitor(1)
-                        .reportsCounter(3)
+                        .latitude(2F)
+                        .longitude(2F)
                         .build();
 
         rebel = Rebel
@@ -80,10 +78,8 @@ class RebelsRestControllerTest {
                 .age(28)
                 .genre("masculino")
                 .baseName("Vênus")
-                .latitud("2")
-                .longitud("3")
-                .traitor(1)
-                .reportsCounter(3)
+                .latitude(2F)
+                .longitude(2F)
                 .build();
 
         rebelList = new ArrayList<>();
@@ -95,10 +91,8 @@ class RebelsRestControllerTest {
                 .age(28)
                 .genre("masculino")
                 .baseName("Lua")
-                .latitud("2")
-                .longitud("3")
-                .traitor(1)
-                .reportsCounter(3)
+                .latitude(2F)
+                .longitude(2F)
                 .build();
 
         changeRebelResponse = ChangeRebelResponse
@@ -108,17 +102,14 @@ class RebelsRestControllerTest {
                 .age(28)
                 .genre("masculino")
                 .baseName("Lua")
-                .latitud("2")
-                .longitud("3")
-                .traitor(1)
-                .reportsCounter(3)
+                .latitude(2F)
+                .longitude(2F)
                 .build();
 
         changeRebelsRequestPartially = ChangeRebelsRequest
                 .builder()
                 .age(40)
                 .baseName("Marte")
-                .reportsCounter(5)
                 .build();
 
         partiallyChangedRebelResponse = ChangeRebelResponse
@@ -128,36 +119,33 @@ class RebelsRestControllerTest {
                 .age(40)
                 .genre("masculino")
                 .baseName("Marte")
-                .latitud("2")
-                .longitud("3")
-                .traitor(1)
-                .reportsCounter(5)
+                .latitude(2F)
+                .longitude(2F)
                 .build();
+
+        RebelsCreatedResponse teste = new RebelsCreatedResponse();
+        BeanUtils.copyProperties(rebelsRequest, teste, "id");
     }
 
     @Test
     @DisplayName("Deve retorna uma resposta de rebelde,que deve ter id, nome, idade, gênero, nome da base, latitude, longitude, traidor e número de reportes.")
     void shouldCreateValidRebelResponseWithoutNullProperties() {
-        Mockito.doNothing().when(punctuationService).createPunctuation();
         Mockito.when(rebelsService.create(rebelsRequest)).thenReturn(rebelsCreatedResponse);
 
         RebelsCreatedResponse response = rebelsService.create(rebelsRequest);
+        RebelsCreatedResponse teste = rebelsService.create(rebelsRequest);
 
-        punctuationService.createPunctuation();
-
-        assertNotNull(punctuationService);
         assertNotNull(response);
         assertNotNull(response.getRebel());
 
+        System.out.println(teste);
+        System.out.println(rebelsRequest);
 
-        assertEquals(rebelsRequest.getName(), response.getName());
-        assertEquals(rebelsRequest.getAge(), response.getAge());
-        assertEquals(rebelsRequest.getGenre(), response.getGenre());
-        assertEquals(rebelsRequest.getBaseName(), response.getBaseName());
-        assertEquals(rebelsRequest.getLatitud(), response.getLatitud());
-        assertEquals(rebelsRequest.getLongitud(), response.getLongitud());
-        assertEquals(rebelsRequest.getTraitor(), response.getTraitor());
-        assertEquals(rebelsRequest.getReportsCounter(), response.getReportsCounter());
+
+        assertEquals(rebelsRequest.getName(),response.getName());
+        assertEquals(teste.getName(),response.getName());
+        assertEquals(teste,response);
+
     }
 
     @Test
@@ -194,10 +182,8 @@ class RebelsRestControllerTest {
         assertEquals(rebelChangedResponse.getAge(), changeRebelsRequest.getAge());
         assertEquals(rebelChangedResponse.getGenre(), changeRebelsRequest.getGenre());
         assertEquals(rebelChangedResponse.getBaseName(), changeRebelsRequest.getBaseName());
-        assertEquals(rebelChangedResponse.getLatitud(), changeRebelsRequest.getLatitud());
-        assertEquals(rebelChangedResponse.getLongitud(), changeRebelsRequest.getLongitud());
-        assertEquals(rebelChangedResponse.getTraitor(), changeRebelsRequest.getTraitor());
-        assertEquals(rebelChangedResponse.getReportsCounter(), changeRebelsRequest.getReportsCounter());
+        assertEquals(rebelChangedResponse.getLatitude(), changeRebelsRequest.getLatitude());
+        assertEquals(rebelChangedResponse.getLongitude(), changeRebelsRequest.getLongitude());
     }
 
     @Test

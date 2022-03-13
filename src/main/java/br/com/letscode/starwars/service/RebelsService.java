@@ -3,8 +3,12 @@ package br.com.letscode.starwars.service;
 import br.com.letscode.starwars.enums.errors.RebelValidationError;
 import br.com.letscode.starwars.exception.BusinessException;
 import br.com.letscode.starwars.model.DTO.*;
+import br.com.letscode.starwars.model.Entity.Inventory;
 import br.com.letscode.starwars.model.Entity.Rebel;
+import br.com.letscode.starwars.model.Entity.Reports;
+import br.com.letscode.starwars.repository.RebelsInventoryRepository;
 import br.com.letscode.starwars.repository.RebelsRepository;
+import br.com.letscode.starwars.repository.ReportsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -13,12 +17,17 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static br.com.letscode.starwars.enums.errors.NegotiationValidationError.REBEL_SELLER_NOT_FOUND;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class RebelsService {
 
     private final RebelsRepository repository;
+    private final RebelsInventoryRepository repositoryInventory;
+    private final ReportsRepository repositoryReports;
+
 
     public RebelsCreatedResponse create(CreateRebelsRequest request){
         log.debug("Received rebel to create: {}",request);
@@ -73,10 +82,10 @@ public class RebelsService {
         if(request.getGenre() == null){
             ignoreProperties[5] = "genre";
         }
-        if(request.getLatitud() == null){
+        if(request.getLatitude() == null){
             ignoreProperties[6] = "latitud";
         }
-        if(request.getLongitud() == null){
+        if(request.getLongitude() == null){
             ignoreProperties[7] = "longitud";
         }
         if(request.getBaseName() == null){
@@ -86,6 +95,22 @@ public class RebelsService {
         BeanUtils.copyProperties(request, changeRebel, ignoreProperties);
         changeRebel = repository.save(changeRebel);
         return ChangeRebelResponse.of(changeRebel);
+    }
+
+    public Reports createReport(Long idReportedRebel, Long idReporterRebel){
+        var reported = repository.findById(idReportedRebel);
+        var reporter = repository.findById(idReporterRebel);
+
+        if(reported.isEmpty()){
+            throw new BusinessException(REBEL_SELLER_NOT_FOUND, "Rebelde negociante não existe.");
+        }
+
+        if(reporter.isEmpty()){
+            throw new BusinessException(REBEL_SELLER_NOT_FOUND, "Rebelde negociante não existe.");
+        }
+
+        repositoryReports.save(Reports.of(idReportedRebel,idReporterRebel));
+        return Reports.of(idReportedRebel,idReporterRebel);
     }
 
 }

@@ -38,20 +38,14 @@ public class Rebel {
     @Column(name = "GENRE")
     private String genre;
 
-    @Column(name = "LATITUD")
-    private String latitud;
+    @Column(name = "LATITUDE")
+    private Float latitude;
 
-    @Column(name = "LONGITUD")
-    private String longitud;
+    @Column(name = "LONGITUDE")
+    private Float longitude;
 
     @Column(name = "BASENAME")
     private String baseName;
-
-    @Column(name = "TRAITOR")
-    private Integer traitor;
-
-    @Column(name = "REPORTS_COUNTER")
-    private Integer reportsCounter;
 
     @OneToOne(mappedBy = "rebel")
     private Inventory inventory;

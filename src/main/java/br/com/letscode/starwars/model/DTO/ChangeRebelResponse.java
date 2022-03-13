@@ -16,11 +16,9 @@ public class ChangeRebelResponse {
     private String name;
     private Integer age;
     private String genre;
-    private String latitud;
-    private String longitud;
+    private Float latitude;
+    private Float longitude;
     private String baseName;
-    private Integer traitor;
-    private Integer reportsCounter;
 
     public static ChangeRebelResponse of(Rebel rebels){
         ChangeRebelResponse response = new ChangeRebelResponse();
