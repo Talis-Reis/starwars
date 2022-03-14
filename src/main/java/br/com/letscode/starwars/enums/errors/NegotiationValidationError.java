@@ -5,6 +5,9 @@ import org.springframework.http.HttpStatus;
 public enum NegotiationValidationError implements ValidationError{
     REBEL_SELLER_NOT_FOUND(HttpStatus.NOT_FOUND),
     REBEL_BUYER_NOT_FOUND(HttpStatus.NOT_FOUND),
+    NEGOTIATION_NOT_FOUND(HttpStatus.NOT_FOUND),
+    REBEL_IS_NOT_DEALER(HttpStatus.BAD_REQUEST),
+
     FORBIDDEN_NEGOTIATE_WITH_YOURSELF(HttpStatus.BAD_REQUEST),
     UNFAIR_NEGOTIATION(HttpStatus.BAD_REQUEST),
     CLIENT_WITH_LOCKED_INVENTORY(HttpStatus.BAD_REQUEST),

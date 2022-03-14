@@ -3,16 +3,18 @@ package br.com.letscode.starwars.model.Entity;
 import br.com.letscode.starwars.model.DTO.InventoryEmbedded;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
 @Table(name="TB_INVENTORY")
 @Entity
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Inventory {
@@ -22,19 +24,15 @@ public class Inventory {
     @JsonIgnore
     private Long inventory;
 
-    @NotBlank
     @Column(name = "WEAPONS")
     private Integer weapons;
 
-    @NotBlank
     @Column(name = "AMMUNITION")
     private Integer ammunition;
 
-    @NotBlank
     @Column(name = "WATERS")
     private Integer waters;
 
-    @NotBlank
     @Column(name = "FOOD")
     private Integer food;
 
@@ -49,4 +47,17 @@ public class Inventory {
         return inventory;
     }
 
+    public void addItems(InventoryEmbedded inventoryItems){
+        this.ammunition += inventoryItems.getAmmunition();
+        this.food += inventoryItems.getFood();
+        this.waters += inventoryItems.getWaters();
+        this.weapons += inventoryItems.getWeapons();
+    }
+
+    public void removeItems(InventoryEmbedded inventoryItems){
+        this.ammunition -= inventoryItems.getAmmunition();
+        this.food -= inventoryItems.getFood();
+        this.waters -= inventoryItems.getWaters();
+        this.weapons -= inventoryItems.getWeapons();
+    }
 }

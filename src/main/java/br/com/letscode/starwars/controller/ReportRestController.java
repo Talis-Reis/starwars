@@ -30,7 +30,7 @@ public class ReportRestController {
         return report;
     }
 
-    @GetMapping(value = "/Traitors")
+    @GetMapping(value = "/traitors")
     public List<Traitor> getAll(){
         List<Traitor> traitors = reportService.getAllTraitors();
         return traitors;
