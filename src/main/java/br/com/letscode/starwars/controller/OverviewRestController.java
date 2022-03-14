@@ -1,6 +1,5 @@
 package br.com.letscode.starwars.controller;
 
-import br.com.letscode.starwars.model.DTO.InventoryAVG;
 import br.com.letscode.starwars.model.DTO.OverviewResponse;
 import br.com.letscode.starwars.service.OverviewService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name="Overviews")
 @AllArgsConstructor
 @Slf4j
-public class OverviewController {
+public class OverviewRestController {
     private OverviewService overviewService;
 
     @GetMapping

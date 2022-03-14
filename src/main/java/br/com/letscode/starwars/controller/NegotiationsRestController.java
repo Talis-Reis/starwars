@@ -1,11 +1,9 @@
 package br.com.letscode.starwars.controller;
 
 import br.com.letscode.starwars.model.DTO.AcceptedNegotiationResponse;
-import br.com.letscode.starwars.model.DTO.ListNegotiationResponse;
 import br.com.letscode.starwars.model.DTO.StartNegotiationRequest;
 import br.com.letscode.starwars.model.DTO.StartedNegotiationResponse;
 import br.com.letscode.starwars.model.Entity.Negotiation;
-import br.com.letscode.starwars.model.Entity.Rebel;
 import br.com.letscode.starwars.service.NegotiationService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -14,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/rebels/{sellerId}/negotiations")

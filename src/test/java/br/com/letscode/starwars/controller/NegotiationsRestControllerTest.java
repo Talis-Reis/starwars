@@ -1,8 +1,9 @@
 package br.com.letscode.starwars.controller;
 
-import br.com.letscode.starwars.model.DTO.*;
-import br.com.letscode.starwars.model.Entity.Inventory;
-import br.com.letscode.starwars.model.Entity.Negotiation;
+import br.com.letscode.starwars.model.DTO.AcceptedNegotiationResponse;
+import br.com.letscode.starwars.model.DTO.InventoryEmbedded;
+import br.com.letscode.starwars.model.DTO.StartNegotiationRequest;
+import br.com.letscode.starwars.model.DTO.StartedNegotiationResponse;
 import br.com.letscode.starwars.model.Entity.Negotiation;
 import br.com.letscode.starwars.model.Entity.Rebel;
 import br.com.letscode.starwars.service.NegotiationService;
@@ -19,7 +20,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 class NegotiationsRestControllerTest {
