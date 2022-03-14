@@ -1,6 +1,5 @@
 package br.com.letscode.starwars.model.Entity;
 
-import br.com.letscode.starwars.model.DTO.CreateInventoryRebelRequest;
 import br.com.letscode.starwars.model.DTO.InventoryEmbedded;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

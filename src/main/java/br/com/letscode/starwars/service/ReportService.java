@@ -38,11 +38,18 @@ public class ReportService {
 
         if(!idReporterRebel.equals(idReportedRebel)){
             if(repositoryReport.getReportNumber(idReporterRebel,idReportedRebel).equals(0)){
-                if(repositoryReport.getRebelReported(idReportedRebel) < 3){
+                var numberReports = repositoryReport.getRebelReported(idReportedRebel);
+                if(numberReports < 3){
+                    System.out.println(repositoryReport.getRebelReported(idReportedRebel));
+                    System.out.println("Qause lá");
                     repositoryReport.save(Report.of(idReporterRebel,idReportedRebel));
+
+                    if(numberReports == 2){
+                        repositoryTraitor.save(Traitor.of(idReportedRebel));
+                    }
+
                     return Report.of(idReporterRebel,idReportedRebel);
                 }else{
-                    repositoryTraitor.save(Traitor.of(idReportedRebel));
                     throw new BusinessException(THIS_REBEL_IS_A_TRAITOR, "O rebelde já é um traidor...");
                 }
             }else{

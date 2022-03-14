@@ -6,9 +6,11 @@ import br.com.letscode.starwars.enums.errors.RebelValidationError;
 import br.com.letscode.starwars.exception.BusinessException;
 import br.com.letscode.starwars.model.DTO.*;
 import br.com.letscode.starwars.model.Entity.Negotiation;
+import br.com.letscode.starwars.model.Entity.Traitor;
 import br.com.letscode.starwars.repository.NegotiationRepository;
 import br.com.letscode.starwars.repository.RebelsInventoryRepository;
 import br.com.letscode.starwars.repository.RebelsRepository;
+import br.com.letscode.starwars.repository.TraitorRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ public class NegotiationService {
     private final RebelsRepository rebelsRepository;
     private final NegotiationRepository negotiationRepository;
     private final RebelsInventoryRepository repositoryInventory;
+    private final TraitorRepository traitorRepository;
 
     public List<Negotiation> getRebelNegotiations(Long rebelId){
         var rebelOptional = rebelsRepository.findById(rebelId);
@@ -46,7 +49,7 @@ public class NegotiationService {
 
         var sellerRebel = sellerRebelOptional.get();
 
-        if (sellerRebel.getTraitor() == 1){
+        if (traitorRepository.getTraitor(rebelId).isPresent()){
             throw new BusinessException(DEALER_WITH_LOCKED_INVENTORY, "Rebelde traidor não é digno de negociar (inventário bloqueado).");
         }
 
@@ -58,7 +61,7 @@ public class NegotiationService {
             throw new BusinessException(REBEL_BUYER_NOT_FOUND, "Rebelde cliente não existe.");
         }
         var buyerRebel = buyerRebelOptional.get();
-        if (buyerRebel.getTraitor() == 1){
+        if (traitorRepository.getTraitor(request.getBuyerRebel()).isPresent()){
             throw new BusinessException(CLIENT_WITH_LOCKED_INVENTORY, "Rebelde cliente é um traidor! Melhor não negociar..");
         }
 

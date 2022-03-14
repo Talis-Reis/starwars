@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 public interface NegotiationRepository extends JpaRepository<Negotiation, Long> {
-    @Query("SELECT * FROM Negotiation c where c.sellerRebel.rebel = ?1 OR c.buyerRebel.rebel = ?1")
+    @Query("SELECT c FROM Negotiation c where c.sellerRebel.rebel = ?1 OR c.buyerRebel.rebel = ?1")
     List<Negotiation> getRebelNegotiations(Long id);
 
 }
