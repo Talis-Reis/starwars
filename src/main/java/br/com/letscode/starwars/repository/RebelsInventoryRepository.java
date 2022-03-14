@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RebelsInventoryRepository extends JpaRepository<Inventory,Long> {
-
-    @Query("SELECT c FROM Inventory c where c.inventory = ?1")
+   @Query("SELECT c FROM Inventory c where c.inventory = ?1")
     Inventory getJoinInformation(Long id);
 }
