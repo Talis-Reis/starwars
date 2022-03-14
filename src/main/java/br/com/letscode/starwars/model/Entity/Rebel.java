@@ -78,4 +78,8 @@ public class Rebel {
                 && (this.inventory.getWeapons() >= comparedInventory.getWeapons());
     }
 
+    public Integer calculateTotalPoints(){
+        return this.inventory.getPoints();
+    }
+
 }
