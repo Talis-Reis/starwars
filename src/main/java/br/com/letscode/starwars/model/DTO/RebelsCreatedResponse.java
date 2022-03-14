@@ -2,6 +2,7 @@ package br.com.letscode.starwars.model.DTO;
 
 import br.com.letscode.starwars.model.Entity.Rebel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -9,16 +10,15 @@ import org.springframework.beans.BeanUtils;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class RebelsCreatedResponse {
     private Long rebel;
     private String name;
     private Integer age;
     private String genre;
-    private String latitud;
-    private String longitud;
+    private Float latitude;
+    private Float longitude;
     private String baseName;
-    private Integer traitor;
-    private Integer reportsCounter;
     private InventoryEmbedded inventory;
 
     public static RebelsCreatedResponse of(Rebel rebels){

@@ -2,13 +2,12 @@ package br.com.letscode.starwars.service;
 
 import br.com.letscode.starwars.enums.errors.RebelValidationError;
 import br.com.letscode.starwars.exception.BusinessException;
-import br.com.letscode.starwars.model.DTO.*;
+import br.com.letscode.starwars.model.DTO.ChangeRebelResponse;
+import br.com.letscode.starwars.model.DTO.ChangeRebelsRequest;
+import br.com.letscode.starwars.model.DTO.CreateRebelsRequest;
+import br.com.letscode.starwars.model.DTO.RebelsCreatedResponse;
 import br.com.letscode.starwars.model.Entity.Inventory;
-import br.com.letscode.starwars.model.Entity.Punctuation;
 import br.com.letscode.starwars.model.Entity.Rebel;
-import br.com.letscode.starwars.model.Entity.RebelScore;
-import br.com.letscode.starwars.repository.PunctuationRepository;
-import br.com.letscode.starwars.repository.RebelScoreRepository;
 import br.com.letscode.starwars.repository.RebelsInventoryRepository;
 import br.com.letscode.starwars.repository.RebelsRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +25,6 @@ public class RebelsService {
 
     private final RebelsRepository repository;
     private final RebelsInventoryRepository repositoryInventory;
-    private final PunctuationRepository repositoryPunctuation;
-    private final RebelScoreRepository rebelScoreRepository;
 
     public RebelsCreatedResponse create(CreateRebelsRequest request){
         log.debug("Received rebel to create: {}",request);
@@ -41,7 +38,6 @@ public class RebelsService {
         savedInventory.setRebel(savedRebel);
         repositoryInventory.save(savedInventory);
 
-//        log.debug("Received rebel in service: {}",savedRebel); TODO
         return RebelsCreatedResponse.of(savedRebel);
     }
 
@@ -67,10 +63,6 @@ public class RebelsService {
         return ChangeRebelResponse.of(changeRebel);
     }
 
-    public Inventory findByIdInventory(Long id) {
-        return repositoryInventory.getJoinInformation(id);
-    }
-
     public ChangeRebelResponse changeParcialRebel(Long id, ChangeRebelsRequest request) {
         Rebel receiveRebel = Rebel.of(request);
         Rebel changeRebel = this.findById(id);
@@ -87,11 +79,11 @@ public class RebelsService {
         if(request.getGenre() == null){
             ignoreProperties[5] = "genre";
         }
-        if(request.getLatitud() == null){
-            ignoreProperties[6] = "latitud";
+        if(request.getLatitude() == null){
+            ignoreProperties[6] = "latitude";
         }
-        if(request.getLongitud() == null){
-            ignoreProperties[7] = "longitud";
+        if(request.getLongitude() == null){
+            ignoreProperties[7] = "longitude";
         }
         if(request.getBaseName() == null){
             ignoreProperties[8] = "baseName";

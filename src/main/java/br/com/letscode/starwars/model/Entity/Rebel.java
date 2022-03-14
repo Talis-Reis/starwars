@@ -3,7 +3,6 @@ package br.com.letscode.starwars.model.Entity;
 import br.com.letscode.starwars.model.DTO.ChangeRebelsRequest;
 import br.com.letscode.starwars.model.DTO.CreateRebelsRequest;
 import br.com.letscode.starwars.model.DTO.InventoryEmbedded;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,15 +10,15 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Positive;
-import java.io.Serializable;
+
 
 @Table(name="TB_REBELS")
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Rebel {
 
     @Id
@@ -36,20 +35,14 @@ public class Rebel {
     @Column(name = "GENRE")
     private String genre;
 
-    @Column(name = "LATITUD")
-    private String latitud;
+    @Column(name = "LATITUDE")
+    private Float latitude;
 
-    @Column(name = "LONGITUD")
-    private String longitud;
+    @Column(name = "LONGITUDE")
+    private Float longitude;
 
     @Column(name = "BASENAME")
     private String baseName;
-
-    @Column(name = "TRAITOR")
-    private Integer traitor;
-
-    @Column(name = "REPORTS_COUNTER")
-    private Integer reportsCounter;
 
     @OneToOne(mappedBy = "rebel")
     private Inventory inventory;
