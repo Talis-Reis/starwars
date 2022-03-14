@@ -1,8 +1,10 @@
 package br.com.letscode.starwars.controller;
 
-import br.com.letscode.starwars.model.DTO.*;
+import br.com.letscode.starwars.model.DTO.ChangeRebelResponse;
+import br.com.letscode.starwars.model.DTO.ChangeRebelsRequest;
+import br.com.letscode.starwars.model.DTO.CreateRebelsRequest;
+import br.com.letscode.starwars.model.DTO.RebelsCreatedResponse;
 import br.com.letscode.starwars.model.Entity.Rebel;
-import br.com.letscode.starwars.model.Entity.Reports;
 import br.com.letscode.starwars.service.RebelsService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -58,15 +60,5 @@ public class RebelsRestController {
         log.info("Rebel Edited Partial: {}", rebel);
         return rebel;
     }
-
-    @PostMapping(value = "/{id}/report/{idReported}")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Reports createReport(@PathVariable("id") Long idReporterRebel, @PathVariable("idReported") Long idReportedRebel){
-        log.info("Rebel reporter: {}", idReporterRebel);
-        Reports reports = rebelsService.createReport(idReporterRebel,idReportedRebel);
-        log.info("Rebel reported: {}", idReportedRebel);
-        return reports;
-    }
-
 
 }

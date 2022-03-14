@@ -1,6 +1,5 @@
 package br.com.letscode.starwars.service;
 
-import static br.com.letscode.starwars.enums.errors.NegotiationValidationError.*;
 import br.com.letscode.starwars.exception.BusinessException;
 import br.com.letscode.starwars.model.DTO.AcceptedNegotiationResponse;
 import br.com.letscode.starwars.model.DTO.StartNegotiationRequest;
@@ -13,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+
+import static br.com.letscode.starwars.enums.errors.NegotiationValidationError.*;
 
 @Service
 @Slf4j

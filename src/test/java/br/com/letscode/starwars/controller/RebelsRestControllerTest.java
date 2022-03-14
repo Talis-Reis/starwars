@@ -1,6 +1,9 @@
 package br.com.letscode.starwars.controller;
 
-import br.com.letscode.starwars.model.DTO.*;
+import br.com.letscode.starwars.model.DTO.ChangeRebelResponse;
+import br.com.letscode.starwars.model.DTO.ChangeRebelsRequest;
+import br.com.letscode.starwars.model.DTO.CreateRebelsRequest;
+import br.com.letscode.starwars.model.DTO.RebelsCreatedResponse;
 import br.com.letscode.starwars.model.Entity.Rebel;
 import br.com.letscode.starwars.service.RebelsService;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +19,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 class RebelsRestControllerTest {

@@ -3,7 +3,6 @@ package br.com.letscode.starwars.controller;
 import br.com.letscode.starwars.model.DTO.StartNegotiationRequest;
 import br.com.letscode.starwars.model.DTO.StartedNegotiationResponse;
 import br.com.letscode.starwars.service.NegotiationService;
-import br.com.letscode.starwars.service.RebelsService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @Slf4j
 public class NegotiationsRestController {
-    private final RebelsService rebelsService;
     private final NegotiationService negotiationService;
 
     @PostMapping

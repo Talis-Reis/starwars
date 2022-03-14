@@ -3,7 +3,6 @@ package br.com.letscode.starwars.model.Entity;
 import br.com.letscode.starwars.model.DTO.ChangeRebelsRequest;
 import br.com.letscode.starwars.model.DTO.CreateRebelsRequest;
 import br.com.letscode.starwars.model.DTO.InventoryEmbedded;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,9 +10,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Positive;
-import java.io.Serializable;
 
 
 @Table(name="TB_REBELS")
