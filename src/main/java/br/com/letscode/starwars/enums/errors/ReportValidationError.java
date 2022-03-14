@@ -4,7 +4,9 @@ import org.springframework.http.HttpStatus;
 
 public enum ReportValidationError implements ValidationError{
     REBELS_CAN_ONLY_REPORT_ONCE(HttpStatus.BAD_REQUEST),
-    THIS_REBEL_IS_A_TRAITOR(HttpStatus.BAD_REQUEST);
+    THIS_REBEL_IS_A_TRAITOR(HttpStatus.BAD_REQUEST),
+    THIS_REBEL_A_TRAITOR(HttpStatus.BAD_REQUEST),
+    THIS__IS_A_TRAITOR(HttpStatus.BAD_REQUEST);
 
     private final HttpStatus status;
 
