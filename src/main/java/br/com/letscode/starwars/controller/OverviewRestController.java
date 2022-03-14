@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name="Overviews")
 @AllArgsConstructor
 @Slf4j
-public class OverviewController {
+public class OverviewRestController {
     private OverviewService overviewService;
 
     @GetMapping
