@@ -150,10 +150,10 @@ class RebelsRestControllerTest {
     @DisplayName("Deve retornar todos os rebeldes salvos em um repositório.")
     void shouldGetAllRebelsInRepository() {
         Mockito.when(rebelsService.getAllRebels()).thenReturn(rebelList);
-        List<Rebel> retornoRebel = restController.getAll();
+        List<Rebel> returnRebel = restController.getAll();
 
-        assertEquals(retornoRebel, rebelList);
-        assertNotNull(retornoRebel);
+        assertEquals(returnRebel, rebelList);
+        assertNotNull(returnRebel);
     }
 
     @Test

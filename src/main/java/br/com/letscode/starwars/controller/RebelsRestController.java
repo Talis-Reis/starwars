@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,16 +26,17 @@ public class RebelsRestController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public RebelsCreatedResponse createRebel(@RequestBody CreateRebelsRequest request){
+    public RebelsCreatedResponse createRebel(@RequestBody @Valid CreateRebelsRequest request){
         log.info("Creating rebel: {}", request);
         RebelsCreatedResponse rebel =  rebelsService.create(request);
         log.info("Rebel Created: {}", rebel);
         return rebel;
     }
 
+    @GetMapping
     public List<Rebel> getAll(){
-        List<Rebel> retornoRebel = rebelsService.getAllRebels();
-        return retornoRebel;
+        List<Rebel> rebels = rebelsService.getAllRebels();
+        return rebels;
     }
 
     @GetMapping(value = "/{id}")
@@ -44,7 +46,7 @@ public class RebelsRestController {
 
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ChangeRebelResponse changeRebel (@PathVariable("id") Long id, @RequestBody ChangeRebelsRequest request){
+    public ChangeRebelResponse changeRebel (@PathVariable("id") Long id, @RequestBody @Valid ChangeRebelsRequest request){
         log.info("Editing Rebel: {}", request);
         ChangeRebelResponse rebel =  rebelsService.changeRebel(id, request);
         log.info("Rebel Edited: {}", rebel);
@@ -53,7 +55,7 @@ public class RebelsRestController {
 
     @PatchMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ChangeRebelResponse changeParcialRebel (@PathVariable("id") Long id,@RequestBody ChangeRebelsRequest request){
+    public ChangeRebelResponse changeParcialRebel (@PathVariable("id") Long id,@RequestBody @Valid ChangeRebelsRequest request){
         log.info("Editing Partial Rebel: {}", request);
         ChangeRebelResponse rebel =  rebelsService.changeParcialRebel(id, request);
         log.info("Rebel Edited Partial: {}", rebel);

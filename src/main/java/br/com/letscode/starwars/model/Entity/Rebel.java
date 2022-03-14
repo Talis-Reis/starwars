@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 
 
@@ -25,22 +26,28 @@ public class Rebel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rebel;
 
+    @NotBlank
     @Column(name = "NAME")
     private String name;
 
+    @NotBlank
     @Column(name = "AGE")
     @Positive
     private Integer age;
 
+    @NotBlank
     @Column(name = "GENRE")
     private String genre;
 
+    @NotBlank
     @Column(name = "LATITUDE")
     private Float latitude;
 
+    @NotBlank
     @Column(name = "LONGITUDE")
     private Float longitude;
 
+    @NotBlank
     @Column(name = "BASENAME")
     private String baseName;
 
