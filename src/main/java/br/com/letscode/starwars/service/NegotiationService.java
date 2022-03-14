@@ -1,12 +1,11 @@
 package br.com.letscode.starwars.service;
 
-import static br.com.letscode.starwars.enums.errors.NegotiationValidationError.*;
-
 import br.com.letscode.starwars.enums.errors.RebelValidationError;
 import br.com.letscode.starwars.exception.BusinessException;
-import br.com.letscode.starwars.model.DTO.*;
+import br.com.letscode.starwars.model.DTO.AcceptedNegotiationResponse;
+import br.com.letscode.starwars.model.DTO.StartNegotiationRequest;
+import br.com.letscode.starwars.model.DTO.StartedNegotiationResponse;
 import br.com.letscode.starwars.model.Entity.Negotiation;
-import br.com.letscode.starwars.model.Entity.Traitor;
 import br.com.letscode.starwars.repository.NegotiationRepository;
 import br.com.letscode.starwars.repository.RebelsInventoryRepository;
 import br.com.letscode.starwars.repository.RebelsRepository;
@@ -17,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+
+import static br.com.letscode.starwars.enums.errors.NegotiationValidationError.*;
 
 @Service
 @Slf4j

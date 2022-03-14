@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Table(name="TB_INVENTORY")
 @Entity
