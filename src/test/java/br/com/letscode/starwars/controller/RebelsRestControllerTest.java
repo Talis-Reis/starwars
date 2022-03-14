@@ -127,8 +127,8 @@ class RebelsRestControllerTest {
                 .longitude(2F)
                 .build();
 
-        RebelsCreatedResponse teste = new RebelsCreatedResponse();
-        BeanUtils.copyProperties(rebelsRequest, teste, "id");
+        RebelsCreatedResponse rebelInjetado = new RebelsCreatedResponse();
+        BeanUtils.copyProperties(rebel, rebelInjetado, "id");
     }
 
     @Test
@@ -136,19 +136,13 @@ class RebelsRestControllerTest {
     void shouldCreateValidRebelResponseWithoutNullProperties() {
         Mockito.when(rebelsService.create(rebelsRequest)).thenReturn(rebelsCreatedResponse);
 
-        RebelsCreatedResponse response = rebelsService.create(rebelsRequest);
-        RebelsCreatedResponse teste = rebelsService.create(rebelsRequest);
+        RebelsCreatedResponse response = restController.createRebel(rebelsRequest);;
+        RebelsCreatedResponse rebelInjetado = rebelsService.create(rebelsRequest);
 
         assertNotNull(response);
         assertNotNull(response.getRebel());
 
-        System.out.println(teste);
-        System.out.println(rebelsRequest);
-
-
-        assertEquals(rebelsRequest.getName(),response.getName());
-        assertEquals(teste.getName(),response.getName());
-        assertEquals(teste,response);
+        assertEquals(rebelInjetado,response);
 
     }
 
@@ -156,7 +150,7 @@ class RebelsRestControllerTest {
     @DisplayName("Deve retornar todos os rebeldes salvos em um repositório.")
     void shouldGetAllRebelsInRepository() {
         Mockito.when(rebelsService.getAllRebels()).thenReturn(rebelList);
-        List<Rebel> retornoRebel = rebelsService.getAllRebels();
+        List<Rebel> retornoRebel = restController.getAll();
 
         assertEquals(retornoRebel, rebelList);
         assertNotNull(retornoRebel);
@@ -167,7 +161,7 @@ class RebelsRestControllerTest {
     void shouldFindRebelById() {
         Mockito.when(rebelsService.findById(1L)).thenReturn(rebel);
 
-        Rebel foundRebelById = rebelsService.findById(1L);
+        Rebel foundRebelById = restController.findById(1L);
 
         assertNotNull(foundRebelById);
         assertEquals(foundRebelById, rebel);
@@ -178,7 +172,7 @@ class RebelsRestControllerTest {
     void shouldChangeRebel() {
         Mockito.when(rebelsService.changeRebel(1L, changeRebelsRequest)).thenReturn(changeRebelResponse);
 
-        ChangeRebelResponse rebelChangedResponse = rebelsService.changeRebel(1L, changeRebelsRequest);
+        ChangeRebelResponse rebelChangedResponse = restController.changeRebel(1L, changeRebelsRequest);
 
         assertNotNull(rebelChangedResponse);
 
@@ -194,7 +188,7 @@ class RebelsRestControllerTest {
     void shouldChangePartiallyTheRebel() {
         Mockito.when(rebelsService.changeParcialRebel(1L, changeRebelsRequestPartially)).thenReturn(partiallyChangedRebelResponse);
 
-        ChangeRebelResponse rebel =  rebelsService.changeParcialRebel(1L, changeRebelsRequestPartially);
+        ChangeRebelResponse rebel =  restController.changeParcialRebel(1L, changeRebelsRequestPartially);
         assertNotNull(rebel);
     }
 }

@@ -3,6 +3,7 @@ package br.com.letscode.starwars.model.Entity;
 import br.com.letscode.starwars.enums.types.ItemType;
 import br.com.letscode.starwars.model.DTO.StartNegotiationRequest;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -14,7 +15,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Builder
 public class Negotiation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
