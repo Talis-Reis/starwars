@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Table(name="TB_INVENTORY")
 @Entity
@@ -21,15 +22,19 @@ public class Inventory {
     @JsonIgnore
     private Long inventory;
 
+    @NotBlank
     @Column(name = "WEAPONS")
     private Integer weapons;
 
+    @NotBlank
     @Column(name = "AMMUNITION")
     private Integer ammunition;
 
+    @NotBlank
     @Column(name = "WATERS")
     private Integer waters;
 
+    @NotBlank
     @Column(name = "FOOD")
     private Integer food;
 

@@ -62,9 +62,9 @@ class ReportRestControllerTest {
     @DisplayName("Deve retornar todos os rebeldes salvos em um repositório.")
     void getTraitorsAll() {
         Mockito.when(reportService.getAllTraitors()).thenReturn(traitorList);
-        List<Traitor> retornoTraitor = restController.getAll();
+        List<Traitor> returnTraitor = restController.getAll();
 
-        assertEquals(retornoTraitor, traitorList);
+        assertEquals(returnTraitor, traitorList);
         assertNotNull(traitorList);
     }
 
