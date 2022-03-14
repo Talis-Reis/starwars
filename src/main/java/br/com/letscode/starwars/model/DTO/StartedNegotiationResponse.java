@@ -31,6 +31,7 @@ public class StartedNegotiationResponse {
         response.setAvailableItems(availableItems);
         response.setSellerRebel(negotiation.getSellerRebel().getRebel());
         response.setBuyerRebel(negotiation.getBuyerRebel().getRebel());
+        response.setNegotiation(negotiation.getNegotiation());
         return response;
     }
 }

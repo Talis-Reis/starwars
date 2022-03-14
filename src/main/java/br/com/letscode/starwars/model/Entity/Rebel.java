@@ -5,6 +5,7 @@ import br.com.letscode.starwars.model.DTO.CreateRebelsRequest;
 import br.com.letscode.starwars.model.DTO.InventoryEmbedded;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;

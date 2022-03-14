@@ -4,6 +4,7 @@ import br.com.letscode.starwars.model.DTO.CreateInventoryRebelRequest;
 import br.com.letscode.starwars.model.DTO.InventoryEmbedded;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -14,6 +15,7 @@ import java.io.Serializable;
 @Table(name="TB_INVENTORY")
 @Entity
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Inventory {
@@ -44,5 +46,19 @@ public class Inventory {
         Inventory inventory = new Inventory();
         BeanUtils.copyProperties(request, inventory);
         return inventory;
+    }
+
+    public void addItems(InventoryEmbedded inventoryItems){
+        this.ammunition += inventoryItems.getAmmunition();
+        this.food += inventoryItems.getFood();
+        this.waters += inventoryItems.getWaters();
+        this.weapons += inventoryItems.getWeapons();
+    }
+
+    public void removeItems(InventoryEmbedded inventoryItems){
+        this.ammunition -= inventoryItems.getAmmunition();
+        this.food -= inventoryItems.getFood();
+        this.waters -= inventoryItems.getWaters();
+        this.weapons -= inventoryItems.getWeapons();
     }
 }

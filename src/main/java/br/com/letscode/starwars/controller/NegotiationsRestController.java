@@ -1,5 +1,6 @@
 package br.com.letscode.starwars.controller;
 
+import br.com.letscode.starwars.model.DTO.AcceptedNegotiationResponse;
 import br.com.letscode.starwars.model.DTO.StartNegotiationRequest;
 import br.com.letscode.starwars.model.DTO.StartedNegotiationResponse;
 import br.com.letscode.starwars.service.NegotiationService;
@@ -25,6 +26,14 @@ public class NegotiationsRestController {
         log.info("Creating  negotiation: {}", request);
         var negotiation =  negotiationService.startNew(id, request);
         log.info("Negotiation Created: {}", negotiation);
+        return negotiation;
+    }
+
+    @PatchMapping(value = "/{negotiationId}/accept")
+    public AcceptedNegotiationResponse acceptNegotiation(@PathVariable("id") Long id, @PathVariable("negotiationId")Long negotiationId){
+        log.info("Accept  negotiation: {}", negotiationId);
+        var negotiation =  negotiationService.accept(id, negotiationId);
+        log.info("Negotiation Accepted: {}", negotiation);
         return negotiation;
     }
 }

@@ -8,11 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateInventoryRebelRequest {
-
-    private Long rebel;
     private Integer weapons;
     private Integer ammunition;
     private Integer waters;
     private Integer food;
-
 }

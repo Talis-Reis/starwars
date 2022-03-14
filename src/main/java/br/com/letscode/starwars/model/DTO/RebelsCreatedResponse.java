@@ -31,5 +31,4 @@ public class RebelsCreatedResponse {
         response.setInventory(inventory);
         return response;
     }
-
 }
