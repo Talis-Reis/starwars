@@ -4,7 +4,8 @@ import org.springframework.http.HttpStatus;
 
 public enum ReportValidationError implements ValidationError{
     REBELS_CAN_ONLY_REPORT_ONCE(HttpStatus.BAD_REQUEST),
-    THIS_REBEL_IS_A_TRAITOR(HttpStatus.BAD_REQUEST);
+    THIS_REBEL_IS_A_TRAITOR(HttpStatus.BAD_REQUEST),
+    REBEL_SELLER_NOT_FOUND(HttpStatus.BAD_REQUEST);
 
     private final HttpStatus status;
 
@@ -14,11 +15,11 @@ public enum ReportValidationError implements ValidationError{
 
     @Override
     public String getName() {
-        return null;
+        return this.name();
     }
 
     @Override
     public HttpStatus getStatus() {
-        return null;
+        return this.status;
     }
 }

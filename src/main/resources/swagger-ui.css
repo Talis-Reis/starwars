@@ -20,6 +20,11 @@
     margin-right: 0.4rem;
 }
 
+[data-tag="Report"]::before {
+    content: "\1F9CD";
+    vertical-align: middle;
+}
+
 [data-tag="Rebels"]::before {
     content: "\1F525";
     vertical-align: middle;

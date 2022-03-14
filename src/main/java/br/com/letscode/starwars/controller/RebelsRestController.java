@@ -32,7 +32,6 @@ public class RebelsRestController {
         return rebel;
     }
 
-    @GetMapping
     public List<Rebel> getAll(){
         List<Rebel> retornoRebel = rebelsService.getAllRebels();
         return retornoRebel;
