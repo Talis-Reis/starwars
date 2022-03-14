@@ -1,5 +1,6 @@
 package br.com.letscode.starwars.model.Entity;
 
+import br.com.letscode.starwars.enums.types.ItemType;
 import br.com.letscode.starwars.model.DTO.InventoryEmbedded;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -59,5 +60,12 @@ public class Inventory {
         this.food -= inventoryItems.getFood();
         this.waters -= inventoryItems.getWaters();
         this.weapons -= inventoryItems.getWeapons();
+    }
+
+    public int getPoints(){
+        return weapons *  ItemType.WEAPONS.getPrice()
+                + ammunition * ItemType.AMMUNITION.getPrice()
+                + waters * ItemType.WATERS.getPrice()
+                + food * ItemType.FOOD.getPrice();
     }
 }
