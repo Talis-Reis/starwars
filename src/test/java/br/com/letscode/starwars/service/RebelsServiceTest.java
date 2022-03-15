@@ -139,7 +139,6 @@ class RebelsServiceTest {
         Mockito.when(rebelRepository.save(savedRebel)).thenReturn(savedRebel);
         Mockito.when(repositoryInventory.save(inventory)).thenReturn(savedInventory);
 
-
         RebelsCreatedResponse response = rebelsService.create(rebelsRequest);;
 
         assertNotNull(response);

@@ -54,7 +54,7 @@ public class ReportService {
                 throw new BusinessException(REBELS_CAN_ONLY_REPORT_ONCE, "Apenas um report por rebelde...");
             }
         }else{
-            throw new BusinessException(REBELS_CAN_ONLY_REPORT_ONCE, "Rebelde não pode se autoreportar...");
+            throw new BusinessException(FORBIDDEN_REPORT_YOURSELF, "Rebelde não pode se autoreportar...");
         }
 
     }
@@ -62,6 +62,5 @@ public class ReportService {
     public List<Traitor> getAllTraitors(){
         return new ArrayList<>(repositoryTraitor.findAll());
     }
-
 
 }
