@@ -57,7 +57,7 @@ public class RebelsRestController {
     @ResponseStatus(HttpStatus.OK)
     public ChangeRebelResponse changeParcialRebel (@PathVariable("id") Long id,@RequestBody @Valid ChangeRebelsRequest request){
         log.info("Editing Partial Rebel: {}", request);
-        ChangeRebelResponse rebel =  rebelsService.changeParcialRebel(id, request);
+        ChangeRebelResponse rebel =  rebelsService.changePartialRebel(id, request);
         log.info("Rebel Edited Partial: {}", rebel);
         return rebel;
     }

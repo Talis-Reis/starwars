@@ -1,6 +1,5 @@
 package br.com.letscode.starwars.service;
 
-import br.com.letscode.starwars.controller.NegotiationsRestController;
 import br.com.letscode.starwars.enums.errors.NegotiationValidationError;
 import br.com.letscode.starwars.enums.errors.RebelValidationError;
 import br.com.letscode.starwars.exception.BusinessException;

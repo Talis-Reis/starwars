@@ -40,8 +40,6 @@ public class ReportService {
             if(repositoryReport.getReportNumber(idReporterRebel,idReportedRebel).equals(0)){
                 var numberReports = repositoryReport.getRebelReported(idReportedRebel);
                 if(numberReports < 3){
-                    System.out.println(repositoryReport.getRebelReported(idReportedRebel));
-                    System.out.println("Qause lá");
                     repositoryReport.save(Report.of(idReporterRebel,idReportedRebel));
 
                     if(numberReports == 2){
@@ -56,7 +54,7 @@ public class ReportService {
                 throw new BusinessException(REBELS_CAN_ONLY_REPORT_ONCE, "Apenas um report por rebelde...");
             }
         }else{
-            throw new BusinessException(REBELS_CAN_ONLY_REPORT_ONCE, "Rebelde não pode se autoreportar...");
+            throw new BusinessException(FORBIDDEN_REPORT_YOURSELF, "Rebelde não pode se autoreportar...");
         }
 
     }
@@ -64,6 +62,5 @@ public class ReportService {
     public List<Traitor> getAllTraitors(){
         return new ArrayList<>(repositoryTraitor.findAll());
     }
-
 
 }
