@@ -1,6 +1,8 @@
 package br.com.letscode.starwars.service;
 
 import br.com.letscode.starwars.controller.NegotiationsRestController;
+import br.com.letscode.starwars.enums.errors.RebelValidationError;
+import br.com.letscode.starwars.exception.BusinessException;
 import br.com.letscode.starwars.model.DTO.*;
 import br.com.letscode.starwars.model.Entity.Inventory;
 import br.com.letscode.starwars.model.Entity.Rebel;
@@ -164,6 +166,17 @@ class RebelsServiceTest {
 
         assertNotNull(foundRebelById);
         assertEquals(foundRebelById, rebel);
+    }
+
+    @Test
+    @DisplayName("Deve retornar um erro de rebelde inexistente.")
+    void shouldNotFoundRebelById() {
+        Mockito.when(rebelRepository.findById(2L)).thenReturn(Optional.empty());
+
+        BusinessException exception = assertThrows(BusinessException.class, () -> {
+            rebelsService.findById(2L);
+        });
+        assertEquals(exception.getType(), RebelValidationError.NOT_FOUND_REBEL);
     }
 
     @Test

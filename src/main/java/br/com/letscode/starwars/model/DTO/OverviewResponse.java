@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@Builder
 @NoArgsConstructor
+@Builder
 public class OverviewResponse {
     private Float percentRebel;
     private Float percentTraitor;
