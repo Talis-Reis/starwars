@@ -63,8 +63,7 @@ public class RebelsService {
         return ChangeRebelResponse.of(changeRebel);
     }
 
-    public ChangeRebelResponse changeParcialRebel(Long id, ChangeRebelsRequest request) {
-        Rebel receiveRebel = Rebel.of(request);
+    public ChangeRebelResponse changePartialRebel(Long id, ChangeRebelsRequest request) {
         Rebel changeRebel = this.findById(id);
         String[] ignoreProperties = new String[9];
         ignoreProperties[0] = "id";

@@ -186,7 +186,7 @@ class RebelsRestControllerTest {
 
     @Test
     void shouldChangePartiallyTheRebel() {
-        Mockito.when(rebelsService.changeParcialRebel(1L, changeRebelsRequestPartially)).thenReturn(partiallyChangedRebelResponse);
+        Mockito.when(rebelsService.changePartialRebel(1L, changeRebelsRequestPartially)).thenReturn(partiallyChangedRebelResponse);
 
         ChangeRebelResponse rebel =  restController.changeParcialRebel(1L, changeRebelsRequestPartially);
         assertNotNull(rebel);

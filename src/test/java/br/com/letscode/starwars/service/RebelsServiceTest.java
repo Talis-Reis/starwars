@@ -1,6 +1,5 @@
 package br.com.letscode.starwars.service;
 
-import br.com.letscode.starwars.controller.NegotiationsRestController;
 import br.com.letscode.starwars.enums.errors.RebelValidationError;
 import br.com.letscode.starwars.exception.BusinessException;
 import br.com.letscode.starwars.model.DTO.*;
@@ -202,7 +201,7 @@ class RebelsServiceTest {
         Mockito.when(rebelRepository.findById(1L)).thenReturn(Optional.of(rebel));
         Mockito.when(rebelRepository.save(rebel)).thenReturn(rebel);
 
-        ChangeRebelResponse rebel =  rebelsService.changeParcialRebel(1L, changeRebelsRequestPartially);
+        ChangeRebelResponse rebel =  rebelsService.changePartialRebel(1L, changeRebelsRequestPartially);
         assertNotNull(rebel);
     }
 
@@ -211,7 +210,7 @@ class RebelsServiceTest {
         Mockito.when(rebelRepository.findById(1L)).thenReturn(Optional.of(rebel));
         Mockito.when(rebelRepository.save(rebel)).thenReturn(rebel);
 
-        ChangeRebelResponse rebel =  rebelsService.changeParcialRebel(1L, new ChangeRebelsRequest());
+        ChangeRebelResponse rebel =  rebelsService.changePartialRebel(1L, new ChangeRebelsRequest());
         assertNotNull(rebel);
     }
 

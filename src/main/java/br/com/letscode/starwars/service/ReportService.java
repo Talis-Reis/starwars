@@ -40,8 +40,6 @@ public class ReportService {
             if(repositoryReport.getReportNumber(idReporterRebel,idReportedRebel).equals(0)){
                 var numberReports = repositoryReport.getRebelReported(idReportedRebel);
                 if(numberReports < 3){
-                    System.out.println(repositoryReport.getRebelReported(idReportedRebel));
-                    System.out.println("Qause lá");
                     repositoryReport.save(Report.of(idReporterRebel,idReportedRebel));
 
                     if(numberReports == 2){
