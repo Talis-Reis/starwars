@@ -35,7 +35,6 @@ public class RebelsService {
         newRebel.setInventory(savedInventory);
         Rebel savedRebel = repository.save(newRebel);
 
-
         savedInventory.setRebel(savedRebel);
         repositoryInventory.save(savedInventory);
 

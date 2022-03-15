@@ -79,8 +79,9 @@ public class NegotiationService {
         if(!newNegotiation.isFair()){
             throw new BusinessException(UNFAIR_NEGOTIATION, "A quantidade pontos de ambos os lados deve ser igual.");
         }
-
+        System.out.println(newNegotiation);
         var savedNegotiation = negotiationRepository.save(newNegotiation);
+        System.out.println(savedNegotiation);
         log.debug("Saved Negotiation => {}", savedNegotiation);
         return StartedNegotiationResponse.of(savedNegotiation);
     }
@@ -88,10 +89,8 @@ public class NegotiationService {
     @Transactional
     public AcceptedNegotiationResponse accept(Long rebelId, Long negotiationId) {
         log.debug("Received negotiation to accept: {}", "");
-
         var buyerRebelOptional = rebelsRepository.findById(rebelId);
         var negotiationOptional = negotiationRepository.findById(negotiationId);
-
         if(buyerRebelOptional.isEmpty()){
             throw new BusinessException(REBEL_BUYER_NOT_FOUND, "Rebelde cliente não existe.");
         }
@@ -100,9 +99,18 @@ public class NegotiationService {
             throw new BusinessException(NEGOTIATION_NOT_FOUND, "Negociação não existe.");
         }
 
+        if (traitorRepository.getTraitor(rebelId).isPresent()){
+            throw new BusinessException(CLIENT_WITH_LOCKED_INVENTORY, "Agora por ser um traidor não poderás negociar..");
+        }
+
         var negotiation = negotiationOptional.get();
         var sellerRebel = negotiation.getSellerRebel();
         var buyerRebel = negotiation.getBuyerRebel();
+
+        if (traitorRepository.getTraitor(sellerRebel.getRebel()).isPresent()){
+            throw new BusinessException(DEALER_WITH_LOCKED_INVENTORY, "Rebelde negociante virou um traidor! Melhor não negociar..");
+        }
+
         var negotiationResponse = AcceptedNegotiationResponse.of(negotiation);
         var availableItems = negotiationResponse.getAvailableItems();
         var requiredItems = negotiationResponse.getRequiredItems();
@@ -110,7 +118,6 @@ public class NegotiationService {
         if(rebelId.equals(sellerRebel.getRebel())){
             throw new BusinessException(REBEL_IS_NOT_DEALER, "Não participação do rebelde cliente na negociação.");
         }
-
         if(!sellerRebel.hasItemsInInventory(availableItems)){
             throw new BusinessException(DEALER_WITH_INSUFFICIENT_ITEMS, "O rebelde negociante está oferecendo demais...");
         }
@@ -118,7 +125,6 @@ public class NegotiationService {
         if(!buyerRebel.hasItemsInInventory(requiredItems)){
             throw new BusinessException(CLIENT_WITH_INSUFFICIENT_ITEMS, "O rebelde cliente não possui todos estes items..");
         }
-
         var sellerInventory = sellerRebel.getInventory();
         var buyerInventory = buyerRebel.getInventory();
 
@@ -136,22 +142,18 @@ public class NegotiationService {
         return negotiationResponse;
     }
 
-
     public void refuse(Long rebelId, Long negotiationId) {
         log.debug("Received negotiation to accept: {}", "");
 
         var buyerRebelOptional = rebelsRepository.findById(rebelId);
         var negotiationOptional = negotiationRepository.findById(negotiationId);
 
-
         if(buyerRebelOptional.isEmpty()){
             throw new BusinessException(REBEL_BUYER_NOT_FOUND, "Rebelde cliente não existe.");
         }
-
         if(negotiationOptional.isEmpty()){
             throw new BusinessException(NEGOTIATION_NOT_FOUND, "Negociação não existe.");
         }
-
         var negotiation = negotiationOptional.get();
         var sellerRebel = negotiation.getSellerRebel();
 

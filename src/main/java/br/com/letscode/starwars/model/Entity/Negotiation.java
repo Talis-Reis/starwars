@@ -15,7 +15,6 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class Negotiation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,7 +62,6 @@ public class Negotiation {
 
 @Embeddable
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 class InventoryTransition{
     private Integer weapons;

@@ -1,13 +1,11 @@
 package br.com.letscode.starwars.model.DTO;
 
 import br.com.letscode.starwars.model.Entity.Negotiation;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class AcceptedNegotiationResponse {
     private Long negotiation;

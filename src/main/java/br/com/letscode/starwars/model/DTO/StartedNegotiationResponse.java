@@ -9,7 +9,6 @@ import org.springframework.beans.BeanUtils;
 
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class StartedNegotiationResponse {
     private Long negotiation;
