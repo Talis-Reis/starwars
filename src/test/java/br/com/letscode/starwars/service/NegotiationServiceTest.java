@@ -125,6 +125,7 @@ class NegotiationServiceTest {
 
         acceptedNegotiationResponse = new AcceptedNegotiationResponse();
         BeanUtils.copyProperties(startedNegotiationResponse, acceptedNegotiationResponse);
+        acceptedNegotiationResponse.setSellerRebel(sellerRebel.getRebel());
 
         negotiation = Negotiation.of(sellerRebel, buyerRebel, startNegotiationRequest);
 
@@ -254,8 +255,6 @@ class NegotiationServiceTest {
     @DisplayName("Deve validar se retorno de aceitação de uma negociação.")
     void shouldAllowAcceptNegotiation() {
         var response = negotiationService.accept(buyerRebel.getRebel(), negotiationSaved.getNegotiation());
-
-        assertNotNull(response);
         assertEquals(response, acceptedNegotiationResponse);
     }
 
