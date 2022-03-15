@@ -20,7 +20,7 @@
 		<sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 		<sonar.language>java</sonar.language>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<sonar.organization>Talis-Reis</sonar.organization>
+		<sonar.organization>starwars</sonar.organization>
 		<sonar.projectKey>starwars</sonar.projectKey>
 	</properties>
 	<dependencies>
