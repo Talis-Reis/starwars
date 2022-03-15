@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping(value = "/rebels/{sellerId}/negotiations")
+@RequestMapping(value = "/rebel/{buyerId}/negotiations")
 @Tag(name="Negotiations")
 @AllArgsConstructor
 @Slf4j
@@ -22,32 +22,32 @@ public class NegotiationsRestController {
     private final NegotiationService negotiationService;
 
     @GetMapping
-    public ArrayList<Negotiation> getAllRebelNegotiations(@PathVariable("sellerId") Long sellerId){
-        return (ArrayList<Negotiation>) negotiationService.getRebelNegotiations(sellerId);
+    public ArrayList<Negotiation> getAllRebelNegotiations(@PathVariable("buyerId") Long buyerId){
+        return (ArrayList<Negotiation>) negotiationService.getRebelNegotiations(buyerId);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public StartedNegotiationResponse createNegotiation(@PathVariable("sellerId") Long sellerId, @RequestBody StartNegotiationRequest request){
+    public StartedNegotiationResponse createNegotiation(@PathVariable("buyerId") Long buyerId, @RequestBody StartNegotiationRequest request){
         log.info("Creating  negotiation: {}", request);
-        var negotiation =  negotiationService.startNew(sellerId, request);
+        var negotiation =  negotiationService.startNew(buyerId, request);
         log.info("Negotiation Created: {}", negotiation);
         return negotiation;
     }
 
     @PatchMapping(value = "/{negotiationId}/accept")
-    public AcceptedNegotiationResponse acceptNegotiation(@PathVariable("sellerId") Long sellerId, @PathVariable("negotiationId")Long negotiationId){
+    public AcceptedNegotiationResponse acceptNegotiation(@PathVariable("buyerId") Long buyerId, @PathVariable("negotiationId")Long negotiationId){
         log.info("Accept  negotiation: {}", negotiationId);
-        var negotiation =  negotiationService.accept(sellerId, negotiationId);
+        var negotiation =  negotiationService.accept(buyerId, negotiationId);
         log.info("Negotiation Accepted: {}", negotiation);
         return negotiation;
     }
 
     @PatchMapping(value = "/{negotiationId}/refuse")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void refuseNegotiation(@PathVariable("sellerId") Long sellerId, @PathVariable("negotiationId")Long negotiationId){
+    public void refuseNegotiation(@PathVariable("buyerId") Long buyerId, @PathVariable("negotiationId")Long negotiationId){
         log.info("Refuse  negotiation: {}", negotiationId);
-        negotiationService.refuse(sellerId, negotiationId);
+        negotiationService.refuse(buyerId, negotiationId);
         log.info("Negotiation Refused: {}", negotiationId);
     }
 }

@@ -3,10 +3,7 @@ package br.com.letscode.starwars.model.Entity;
 import br.com.letscode.starwars.enums.types.ItemType;
 import br.com.letscode.starwars.model.DTO.InventoryEmbedded;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
@@ -14,8 +11,6 @@ import javax.persistence.*;
 @Table(name="TB_INVENTORY")
 @Entity
 @Data
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
 public class Inventory {
 
