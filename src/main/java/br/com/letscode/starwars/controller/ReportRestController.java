@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/rebel")
+@RequestMapping(value = "/rebels")
 @Tag(name="Report")
 @AllArgsConstructor
 @Slf4j

@@ -34,3 +34,13 @@
     content: "\1F91D";
     vertical-align: middle;
 }
+
+
+[data-tag="Overviews"]::before {
+    content: "\1F4CA";
+    vertical-align: middle;
+}
+
+.swagger-ui{
+    background-color: #EEE;
+}
