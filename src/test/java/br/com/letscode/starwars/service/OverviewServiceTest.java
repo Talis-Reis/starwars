@@ -2,6 +2,7 @@ package br.com.letscode.starwars.service;
 
 import br.com.letscode.starwars.model.DTO.InventoryAVG;
 import br.com.letscode.starwars.model.DTO.OverviewResponse;
+import br.com.letscode.starwars.model.Entity.Inventory;
 import br.com.letscode.starwars.model.Entity.Rebel;
 import br.com.letscode.starwars.model.Entity.Traitor;
 import br.com.letscode.starwars.repository.RebelsInventoryRepository;
@@ -40,6 +41,7 @@ class OverviewServiceTest {
         var rebel1 = Rebel
                 .builder()
                 .rebel(1L)
+                .inventory(new Inventory())
                 .build();
         var rebel2 = Rebel
                 .builder()
